@@ -15,13 +15,14 @@ def client():
 
 @pytest.fixture()
 def session():
-    engine = create_engine('sqlite:///:memory:')
+    engine = create_engine("sqlite:///:memory:")
     table_registry.metadata.create_all(engine)
 
     with Session(engine) as session:
         yield session
 
     table_registry.metadata.drop_all(engine)
+
 
 # @pytest.fixture
 # def session():
@@ -39,6 +40,6 @@ def session():
 #     Base.metadata.drop_all(engine)
 
 
-#from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
-#from sqlalchemy import select
+# from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
+# from sqlalchemy import select
 # async_sessionmaker[AsyncSession]

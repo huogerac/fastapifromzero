@@ -1,12 +1,7 @@
-from fastapi.testclient import TestClient
 from fastapi import status
 
-from todo.main import app
 
-client = TestClient(app)
-
-
-def test_core_status():
+def test_core_status(client):
     """First test"""
     response = client.get("/api/core/status")
 
@@ -14,7 +9,7 @@ def test_core_status():
     assert response.json() == {"status": "ok"}
 
 
-def test_swagger_docs():
+def test_swagger_docs(client):
     """Test the docs is working"""
     response = client.get("/docs")
     assert response.status_code == status.HTTP_200_OK

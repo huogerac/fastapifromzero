@@ -5,13 +5,13 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from todo.models.core import table_registry     # NEW
-from todo.settings import Settings              # NEW
+from todo.models.core import table_registry  # NEW
+from todo.settings import Settings  # NEW
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option('sqlalchemy.url', Settings().DATABASE_URL)   # NEW
+config.set_main_option("sqlalchemy.url", Settings().DATABASE_URL)  # NEW
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -22,7 +22,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = table_registry.metadata           # UPDATED
+target_metadata = table_registry.metadata  # UPDATED
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -68,9 +68,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
