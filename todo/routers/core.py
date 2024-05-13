@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio.session import AsyncSession
-from typing import List
 
 from todo.database import get_session
-from todo.schemas.core import TaskSchema, TaskSchemaIn
+from todo.schemas.core import TaskSchema, TaskSchemaIn, ListTasksSchema
 from todo.services import tasks_service
 
 router = APIRouter()
@@ -18,10 +17,10 @@ async def get_status():
     return response
 
 
-@router.get("/tasks", response_model=List[TaskSchema])
+@router.get("/tasks", response_model=ListTasksSchema)
 async def get_tasks(session: AsyncSession = Depends(get_session)):
     """Get tasks"""
-    response = []
+    response = {"tasks": tasks_service.list_tasks(session)}
     return response
 
 

@@ -1,8 +1,9 @@
-from pydantic import BaseModel, ConfigDict, validator
+from typing import List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationInfo, field_validator
 
 
 class TaskSchema(BaseModel):
-    id: str
+    id: Optional[str]
     description: str
     created_at: str
 
@@ -21,8 +22,12 @@ class TaskSchema(BaseModel):
 class TaskSchemaIn(BaseModel):
     description: str
 
-    @validator("description")
-    def valid_description(cls, description):
+    @field_validator("description")
+    def valid_description(cls, description: str, info: ValidationInfo) -> str:
         if description and len(description) <= 2:
             raise ValueError("It must be at least 3 characteres long.")
         return description
+
+
+class ListTasksSchema(BaseModel):
+    tasks: List[TaskSchema]

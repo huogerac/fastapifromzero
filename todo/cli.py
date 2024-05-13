@@ -2,7 +2,7 @@ import typer
 from sqlalchemy import select
 
 from todo.settings import Settings
-from todo.database import engine
+from todo.database import engine, get_session
 from todo.models.core import Task
 
 
@@ -14,8 +14,9 @@ def shell():
     """create the interactive shell"""
     _vars = {
         "engine": engine,
+        "session": next(get_session()),
         "select": select,
-        "Settings": Settings,
+        "settings": Settings(),
         "Task": Task,
     }
     typer.echo(f"Auto imports: {list(_vars.keys())}")

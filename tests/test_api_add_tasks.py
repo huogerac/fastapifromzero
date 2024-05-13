@@ -9,7 +9,7 @@ def test_nao_deve_permitir_criar_task_sem_login():
     pass
 
 
-def test_deve_criar_task_com_login(client):
+def test_deve_criar_nova_task(client, session):
     # Dado um usuario logado
     payload = {"description": "estudar pytest"}
 
