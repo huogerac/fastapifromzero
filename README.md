@@ -39,7 +39,10 @@ pre-commit = "^3.1.1"
 isort = "^5.12.0"
 
 
-
+CHECK IT OUT
+creating two db in the same db instance
+https://www.youtube.com/watch?v=UVBrRKgnJB4
+https://github.com/amarjanica/docker-multi-postgres-databases
 
 
 Links:
@@ -55,7 +58,7 @@ Links:
 
 ASYNC
 https://github.com/gaganpreet/fastapi-starter/blob/main/%7B%7Bcookiecutter.project_slug%7D%7D/backend/tests/conftest.py
-
+https://github.com/gaganpreet/fastapi-starter/blob/main/%7B%7Bcookiecutter.project_slug%7D%7D/backend/pyproject.toml
 
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
