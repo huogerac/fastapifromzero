@@ -5,7 +5,10 @@ description = "FastAPI Todo example"
 authors = ["Roger Camargo <huogerac@gmail.com>"]
 readme = "README.md"
 packages = [{include = "todo"}]
-
+exclude = [
+    "postgres_data",
+    "postgres_data_test",
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -18,6 +21,7 @@ psycopg2-binary = "^2.9.9"
 ipython = "^8.24.0"
 typer = "^0.12.3"
 rich = "^13.7.1"
+watchfiles = "^0.21.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
@@ -37,7 +41,7 @@ codestyle = {cmd = "black todo", help = "Format the code."}
 lint = {cmd = "flake8 .", help = "Run the linter to check PEP8."}
 test = {cmd = "pytest", help = "Run the tests and fail in the first one."}
 test-cov = {cmd = "pytest --cov=todo", help = "Run the tests and give us the test coverage report."}
-runserver = {cmd = "uvicorn todo.main:app --host 0.0.0.0 --port 8000 --reload", help = "Run the fastapi server"}
+runserver = {cmd = "WATCHFILES_IGNORE_PERMISSION_DENIED=0 uvicorn todo.main:app --host 0.0.0.0 --port 8000 --reload", help = "Run the fastapi server"}
 shell = {cmd = "poetry run shell", help = "Run the interactive shell"}
 shelldb = {cmd = "docker compose exec postgres psql --username=todo --dbname=db_todo", help = "Run the db shell"}
 migrate = {cmd = "alembic upgrade head", help = "Run the migrations to update the database"}
@@ -47,7 +51,6 @@ up = {cmd = "docker compose up -d --build", help = "Up the services containers."
 down = {cmd = "docker compose down", help = "Down the services containers."}
 resetdb = {cmd = "docker-compose down -v", help = "Down the services containers and delete the db volume"}
 
-
 [tool.black]
 line-length = 120
 target_version = ['py311']
@@ -56,7 +59,7 @@ include = '\.pyi?$'
 [tool.flake8]
 max-line-length = 120
 exclude = [
-    '.venv/', 'migrations', '.git', '__pycache__', 'postgres_data', 'tests', 
+    '.venv/', 'migrations', '.git', '__pycache__', 'postgres_data', 'postgres_data_test', 'tests', 
 ]
 
 [tool.pytest.ini_options]
@@ -74,7 +77,3 @@ env_files = [
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-exclude = [
-    "postgres_data",
-    "postgres_data_test",
-]
