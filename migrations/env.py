@@ -5,7 +5,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from todo.models.core import table_registry  # NEW
+# from todo.models import table_registry  # NEW
+from todo.database import table_registry
+from todo.models.core import *
+from todo.models.users import *
 from todo.settings import Settings  # NEW
 
 # this is the Alembic Config object, which provides

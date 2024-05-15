@@ -34,15 +34,15 @@ flake8-pyproject = "^1.2.3"
 taskipy = "^1.12.2"
 
 [tool.poetry.scripts]
-shell = "todo.cli:main"
+cli = "todo.cli:main"
 
 [tool.taskipy.tasks]
-codestyle = {cmd = "black todo", help = "Format the code."}
+format = {cmd = "black todo", help = "Format the code."}
 lint = {cmd = "flake8 .", help = "Run the linter to check PEP8."}
 test = {cmd = "pytest", help = "Run the tests and fail in the first one."}
 test-cov = {cmd = "pytest --cov=todo", help = "Run the tests and give us the test coverage report."}
 runserver = {cmd = "WATCHFILES_IGNORE_PERMISSION_DENIED=0 uvicorn todo.main:app --host 0.0.0.0 --port 8000 --reload", help = "Run the fastapi server"}
-shell = {cmd = "poetry run shell", help = "Run the interactive shell"}
+shell = {cmd = "poetry run cli shell", help = "Run the interactive shell"}
 shelldb = {cmd = "docker compose exec postgres psql --username=todo --dbname=db_todo", help = "Run the db shell"}
 migrate = {cmd = "alembic upgrade head", help = "Run the migrations to update the database"}
 makemigrations = {cmd = "alembic revision --autogenerate", help = "Detect models changes and create a new migration. Use -m 'message'"}
@@ -50,6 +50,7 @@ clean = {cmd = "find {pyc} && find {pycache} && find {thumbs} && find {root}", h
 up = {cmd = "docker compose up -d --build", help = "Up the services containers."}
 down = {cmd = "docker compose down", help = "Down the services containers."}
 resetdb = {cmd = "docker-compose down -v", help = "Down the services containers and delete the db volume"}
+createuser = {cmd = "poetry run cli create-user", help = "Create a new user"}
 
 [tool.black]
 line-length = 120

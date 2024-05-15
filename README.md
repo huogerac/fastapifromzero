@@ -57,7 +57,8 @@ Links:
 - https://testcontainers.com/
 - https://medium.com/@johnidouglasmarangon/using-migrations-in-python-sqlalchemy-with-alembic-docker-solution-bd79b219d6a
 - https://thinhdanggroup.github.io/alembic-python/
-
+- https://medium.com/@aashirshakya/fastapi-alembic-sqlalchemy-detecting-all-the-custom-apps-automatically-2936f47f62fa 
+  (Import the models using importlib)
 
 ASYNC
 https://github.com/gaganpreet/fastapi-starter/blob/main/%7B%7Bcookiecutter.project_slug%7D%7D/backend/tests/conftest.py
