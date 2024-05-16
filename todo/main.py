@@ -1,10 +1,13 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from starlette.middleware.base import BaseHTTPMiddleware
 
+from todo.database import get_session
 from todo.routers import main_router
 from todo.settings import Settings
-from todo.exceptions import BusinessError
+from todo.exceptions import BusinessError, UnauthorizedException, ConflictValueException
+from todo.services.auth_service import get_user_by_sessionid
 
 
 settings = Settings()
@@ -46,3 +49,50 @@ async def business_exception_handler(request: Request, exc: BusinessError):
             "message": f"[ERROR] {error}",
         },
     )
+
+
+@app.exception_handler(UnauthorizedException)
+async def unauthorized_exception_handler(request: Request, exc: UnauthorizedException):
+    error = str(exc)
+    return JSONResponse(
+        status_code=401,
+        content={
+            "message": f"[ACCESS ERROR] {error}",
+        },
+    )
+
+
+@app.exception_handler(ConflictValueException)
+async def conflict_exception_handler(request: Request, exc: ConflictValueException):
+    error = str(exc)
+    return JSONResponse(
+        status_code=409,
+        content={
+            "message": f"[DATA ERROR] {error}",
+        },
+    )
+
+
+# @app.middleware("http")
+# async def sessionid_middleware_header(request: Request, call_next):
+#     db_session = next(get_session())
+#     sessionid = request.cookies.get("sessionid")
+#     request.state.sessionid = sessionid
+#     request.state.user = get_user_by_sessionid(db_session, sessionid)
+#     response = await call_next(request)
+#     return response
+
+
+class SessionIdMiddleware(BaseHTTPMiddleware):
+
+    def __init__(self, app):
+        super().__init__(app)
+
+    async def dispatch(self, request: Request, call_next):
+
+        db_session = next(get_session())
+        sessionid = request.cookies.get("sessionid")
+        request.state.sessionid = sessionid
+        request.state.user = get_user_by_sessionid(db_session, sessionid)
+        response = await call_next(request)
+        return response

@@ -59,6 +59,12 @@ Links:
 - https://thinhdanggroup.github.io/alembic-python/
 - https://medium.com/@aashirshakya/fastapi-alembic-sqlalchemy-detecting-all-the-custom-apps-automatically-2936f47f62fa 
   (Import the models using importlib)
+- cookies
+    - https://fastapi.tiangolo.com/advanced/response-cookies/
+    - https://github.com/mbosoft/fastapi-sessionTokenCookieAuthentication/blob/main/security/authSecurity.py
+- test fastapi middleware
+    - https://medium.com/@abdulwasa.abdulkader/how-to-write-unittest-for-code-that-depends-on-middleware-in-fastapi-6b10def5ded1
+    - https://semaphoreci.com/blog/custom-middleware-fastapi
 
 ASYNC
 https://github.com/gaganpreet/fastapi-starter/blob/main/%7B%7Bcookiecutter.project_slug%7D%7D/backend/tests/conftest.py
@@ -97,3 +103,8 @@ async def get_session() -> AsyncSession:
             raise
         finally:
             await session.close()
+
+
+
+DEPLOY AWS SSL
+https://youtu.be/2kcCy25lt7E?si=F9kUQUC0hBm-rIvm

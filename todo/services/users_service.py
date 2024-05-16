@@ -1,4 +1,6 @@
 from todo.models.users import User
+from todo.services.auth_service import get_password_hash
+from todo.exceptions import ConflictValueException
 
 
 def list_users(session) -> list:
@@ -11,12 +13,16 @@ def add_new_user(session, email: str, password: str, username: str = None, name:
     if not username:
         username = email
 
+    user = session.query(User).filter(User.email == email).first()
+    if user:
+        raise ConflictValueException(f"The email '{email}' is already in use.")
+
     new_user = User(
         id=None,
         username=username,
         email=email,
         name=name,
-        password=password,
+        password=get_password_hash(password),
     )
     session.add(new_user)
     session.commit()

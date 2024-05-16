@@ -3,7 +3,7 @@ from pydantic import BaseModel, ConfigDict, ValidationInfo, field_validator
 
 
 class UserSchema(BaseModel):
-    id: Optional[str]
+    id: Optional[int]
     username: str
     email: str
     name: Optional[str]
@@ -23,8 +23,7 @@ class UserSchema(BaseModel):
     )
 
 
-class TaskSchemaIn(BaseModel):
-    description: str
+class UserSchemaIn(BaseModel):
     username: str
     email: str
     password: str
@@ -37,5 +36,10 @@ class TaskSchemaIn(BaseModel):
         return password
 
 
+class UserLoginSchema(BaseModel):
+    email: str
+    password: str
+
+
 class ListUsersSchema(BaseModel):
-    tasks: List[UserSchema]
+    users: List[UserSchema]
