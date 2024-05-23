@@ -1,5 +1,22 @@
 # FastAPI Todo
 
+TODO
+- [ok] /api/docs e nao /docs
+- [ok] app base e /api/dapau, /api/status
+- api/accounts/login, logout, e whoami
+- accounts_user
+    dbshell
+    makemigrations
+    migrate
+    shell
+    showmigrations
+    reset_db
+DATABASE_URL=sqlite:///db_local.sqlite3
+
+_test database
+https://github.com/billcode/jarless/blob/master/devops/docker/entrypoint-initdb.d/initialize-database.sh
+
+
 Commands
 ```bash
 uvicorn todo.main:app --host 0.0.0.0 --port 8000 --reload

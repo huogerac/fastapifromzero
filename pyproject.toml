@@ -24,6 +24,7 @@ rich = "^13.7.1"
 watchfiles = "^0.21.0"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 bcrypt = "4.0.1"
+python-multipart = "^0.0.9"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
@@ -46,10 +47,10 @@ test = {cmd = "pytest", help = "Run the tests and fail in the first one."}
 test-cov = {cmd = "pytest --cov=todo", help = "Run the tests and give us the test coverage report."}
 runserver = {cmd = "WATCHFILES_IGNORE_PERMISSION_DENIED=0 uvicorn todo.main:app --host 0.0.0.0 --port 8000 --reload", help = "Run the fastapi server"}
 shell = {cmd = "poetry run cli shell", help = "Run the interactive shell"}
-shelldb = {cmd = "docker compose exec postgres psql --username=todo --dbname=db_todo", help = "Run the db shell"}
+dbshell = {cmd = "docker compose exec postgres psql --username=todo --dbname=db_todo", help = "Run the db shell"}
 migrate = {cmd = "alembic upgrade head", help = "Run the migrations to update the database"}
 makemigrations = {cmd = "alembic revision --autogenerate", help = "Detect models changes and create a new migration. Use -m 'message'"}
-clean = {cmd = "find {pyc} && find {pycache} && find {thumbs} && find {root}", help = "Clear the project off all files that are dispensables.", use_vars = true}
+#clean = {cmd = "find ./tests/ -type d -name __pycache__ -exec rm -r {} \+", help = "Clear the project off all files that are dispensables."}
 up = {cmd = "docker compose up -d --build", help = "Up the services containers."}
 down = {cmd = "docker compose down", help = "Down the services containers."}
 resetdb = {cmd = "docker-compose down -v", help = "Down the services containers and delete the db volume"}
