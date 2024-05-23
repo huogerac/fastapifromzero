@@ -17,28 +17,15 @@ app = FastAPI(
     docs_url="/api/docs",
 )
 
-origins = [
-    "http://localhost",
-    "http://localhost:8000",
-    "http://localhost:3000",
-]
-
 app.include_router(main_router)
 app.add_middleware(SessionIdMiddleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=settings.ALLOWED_HOSTS.split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.get("/")
-async def home():
-    return {
-        "db_url": settings.DATABASE_URL,
-    }
 
 
 @app.exception_handler(RequestValidationError)

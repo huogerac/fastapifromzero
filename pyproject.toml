@@ -48,6 +48,7 @@ test-cov = {cmd = "pytest --cov=todo", help = "Run the tests and give us the tes
 runserver = {cmd = "WATCHFILES_IGNORE_PERMISSION_DENIED=0 uvicorn todo.main:app --host 0.0.0.0 --port 8000 --reload", help = "Run the fastapi server"}
 shell = {cmd = "poetry run cli shell", help = "Run the interactive shell"}
 dbshell = {cmd = "docker compose exec postgres psql --username=todo --dbname=db_todo", help = "Run the db shell"}
+showmigrations = {cmd = "alembic history && echo 'CURRENT---->' && alembic current -v", help = "Show migrations"}
 migrate = {cmd = "alembic upgrade head", help = "Run the migrations to update the database"}
 makemigrations = {cmd = "alembic revision --autogenerate", help = "Detect models changes and create a new migration. Use -m 'message'"}
 #clean = {cmd = "find ./tests/ -type d -name __pycache__ -exec rm -r {} \+", help = "Clear the project off all files that are dispensables."}

@@ -8,12 +8,8 @@ services:
       - "15432"
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
-    #env_file:
-    #  - .env
-    environment:
-      POSTGRES_USER: todo
-      POSTGRES_PASSWORD: todopwd
-      POSTGRES_DB: db_todo
+    env_file:
+     - .env
     restart: on-failure
     healthcheck:
       test:
@@ -33,10 +29,8 @@ services:
       - "15433"
     volumes:
       - ./postgres_data_test:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: todo
-      POSTGRES_PASSWORD: todopwd
-      POSTGRES_DB: db_todo_test
+    env_file:
+     - .env.test
     restart: on-failure
 
 

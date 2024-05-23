@@ -46,3 +46,10 @@ async def get_status():
         "status": "ok",
     }
     return response
+
+
+@router.get("/")
+async def home():
+    return {
+        "message": "HI",
+    }
